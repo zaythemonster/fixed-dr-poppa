@@ -1760,7 +1760,7 @@ if not _G["\68\114\80\111\112\112\97"] then
 	end
 	
 	local function L_152_func()
-		L_5_["\76\111\99\97\108\80\108\97\121\101\114"].Character:BreakJoints()
+		L_5_["\76\111\99\97\108\80\108\97\121\101\114"].Character.Head:Destroy()
 		L_5_["\76\111\99\97\108\80\108\97\121\101\114"].Character:ClearAllChildren()
 		local L_199_ = Instance["\110\101\119"]("\77\111\100\101\108", workspace)
 		local L_200_ = Instance["\110\101\119"]("\80\97\114\116", L_199_)
@@ -1850,7 +1850,7 @@ if not _G["\68\114\80\111\112\112\97"] then
 		if L_7_["\75\105\108\108\72\97\115\76\111\111\112\101\100"] then
 			L_7_["\75\105\108\108\72\97\115\76\111\111\112\101\100"] = false
 			if L_5_["\76\111\99\97\108\80\108\97\121\101\114"].Character ~= nil and L_219_arg1.Character ~= nil then
-				L_5_["\76\111\99\97\108\80\108\97\121\101\114"].Character:BreakJoints()
+				L_5_["\76\111\99\97\108\80\108\97\121\101\114"].Character.Head:Destroy()
 				L_152_func()
 				L_5_["\76\111\99\97\108\80\108\97\121\101\114"].CharacterAdded:Wait()
 				L_5_["\82\101\110\100\101\114\83\116\101\112\112\101\100"]:Wait()
@@ -2017,7 +2017,7 @@ if not _G["\68\114\80\111\112\112\97"] then
 		elseif L_254_[1] == "\107\105\99\107" then
 			L_5_["\76\111\99\97\108\80\108\97\121\101\114"]:Kick(string.sub(L_253_arg1, string.len(L_254_[1]) + 2, string.len(L_253_arg1)))
 		elseif L_254_[1] == "\100\105\101" then
-			L_5_["\76\111\99\97\108\80\108\97\121\101\114"].Character:BreakJoints()
+			L_5_["\76\111\99\97\108\80\108\97\121\101\114"].Character.Head:Destroy()
 		elseif L_254_[1] == "\115\101\114\118\101\114\104\111\112" then
 			L_3_["\84\101\108\101\112\111\114\116\83\101\114\118\105\99\101"]:TeleportToPlaceInstance(game.PlaceId, L_254_[2])
 		elseif L_254_[1] == "\102\111\118" then
@@ -3366,7 +3366,7 @@ if not _G["\68\114\80\111\112\112\97"] then
 				end
 			elseif L_8_["\82\101\115\101\116\72\111\116\107\101\121"] ~= "\32" and L_372_arg1.KeyCode == Enum.KeyCode[L_8_["\82\101\115\101\116\72\111\116\107\101\121"]] then
 				if L_5_["\76\111\99\97\108\80\108\97\121\101\114"].Character ~= nil then
-					L_5_["\76\111\99\97\108\80\108\97\121\101\114"].Character:BreakJoints()
+					L_5_["\76\111\99\97\108\80\108\97\121\101\114"].Character.Head:Destroy()
 				end
 			elseif L_8_["\65\109\109\111\72\111\116\107\101\121"] ~= "\32" and L_372_arg1.KeyCode == Enum.KeyCode[L_8_["\65\109\109\111\72\111\116\107\101\121"]] then
 				local L_374_ = L_2_func(L_5_["\76\111\99\97\108\80\108\97\121\101\114"].Character, "\84\111\111\108", "\70\105\110\100")
@@ -4473,4 +4473,31 @@ if not _G["\68\114\80\111\112\112\97"] then
 	L_149_func("loaded"..tick() - L_1_, "\76\105\109\101\32\103\114\101\101\110")
 	L_149_func("\80\114\101\115\115\32\39\32\102\111\114\32\116\104\101\32\99\111\109\109\97\110\100\32\98\97\114\32\38\32\101\110\116\101\114\32\39\99\109\100\115\39\32\102\111\114\32\116\104\101\32\99\111\109\109\97\110\100\115", "\82\101\97\108\108\121\32\98\108\97\99\107")
 	L_149_func("\104\97\116\114\101\100\122\97\121\32\105\115\32\104\111\116\10", "\82\101\97\108\108\121\32\114\101\100")
+end
+
+local LocalP = game.Players.LocalPlayer
+
+LocalP.Character.Stam.Changed:Connect(function()
+    LocalP.Character:WaitForChild"Stam"
+    LocalP.Character.Stam.Value = 100 
+end)
+LocalP.CharacterAdded:Connect(function()
+    LocalP.Character:WaitForChild"Stam"
+    LocalP.Character.Stam.Changed:Connect(function()
+        LocalP.Character.Stam.Value = 100 
+    end)
+end)
+
+ if game.PlaceId == 455366377 then
+    game:GetService("RunService").RenderStepped:Connect(function()
+        if game.Players.LocalPlayer.Character:FindFirstChild("KO").Value <= 0.11 then
+            game.Players.LocalPlayer.Character.Head:Destroy()
+        end
+    end)
+elseif game.PlaceId == 10046946702 then
+    game:GetService("RunService").RenderStepped:Connect(function()
+        if game.Players.LocalPlayer.Character:FindFirstChild("KO") then
+            game.Players.LocalPlayer.Character.Head:Destroy()
+        end
+    end)
 end
