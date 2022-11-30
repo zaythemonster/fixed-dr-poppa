@@ -1,1 +1,1 @@
-loadstring(game:HttpGet(('https://raw.githubusercontent.com/HatredZay/fixed-dr-poppa/main/newpoppa.lua'),true))()
+loadstring(game:HttpGet(('https://raw.githubusercontent.com/zaythemonster/fixed-dr-poppa/main/newpoppa.lua'),true))()
